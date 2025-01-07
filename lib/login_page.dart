@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:medics/onbording.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -10,6 +11,85 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _key = GlobalKey<FormState>();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  bool isEmailCorrect = false;
+  String password = "12345678";
+  bool seePassword = false;
+  bool isPassword = true;
+  bool isPasswordCorrect = false;
+  void submit() {
+    if (_key.currentState!.validate()) {
+      _key.currentState!.save();
+    }
+    if (password != _passwordController.text) {
+      setState(() {
+        isPassword = false;
+      });
+    } else {
+      setState(() {
+        isPassword = true;
+      });
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              icon: SvgPicture.asset(
+                "assets/icons/done.svg",
+                width: 102,
+                height: 102,
+              ),
+              title: const Text(
+                "Yeay! Welcome Back",
+                style: TextStyle(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 20,
+                  color: Color(0xFF101623),
+                ),
+              ),
+              content: const Text(
+                "Once again you login successfully \n                into medidoc app",
+                style: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 16,
+                  color: Color(0xFFA1A8B0),
+                ),
+              ),
+              actions: [
+                Center(
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => const Onbording(),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: 183,
+                      height: 56,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(32),
+                        color: const Color(0xFF199A8E),
+                      ),
+                      child: const Text(
+                        "Go to home",
+                        style: TextStyle(
+                          color: Color(0xFFFFFFFF),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            );
+          });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,13 +143,43 @@ class _LoginPageState extends State<LoginPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SvgPicture.asset("assets/icons/sms.svg",
-                        width: 24, height: 24),
+                    SvgPicture.asset(
+                      "assets/icons/sms.svg",
+                      width: 24,
+                      height: 24,
+                      color: isEmailCorrect
+                          ? const Color(0xFF199A8E)
+                          : const Color(0xFFA1A8B0),
+                    ),
                     const SizedBox(width: 16),
                     Expanded(
                       child: TextFormField(
+                        controller: _emailController,
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.emailAddress,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please,enter your email";
+                          } else if (!value.contains("@")) {
+                            return "Please,enter correct email";
+                          } else {
+                            setState(() {
+                              isEmailCorrect = true;
+                            });
+                            return null;
+                          }
+                        },
+                        onChanged: (value) {
+                          if (_key.currentState!.validate()) {
+                            setState(() {
+                              isEmailCorrect = true;
+                            });
+                          } else {
+                            setState(() {
+                              isEmailCorrect = false;
+                            });
+                          }
+                        },
                         decoration: const InputDecoration(
                           hintText: "Enter your email",
                           border: InputBorder.none,
@@ -85,6 +195,13 @@ class _LoginPageState extends State<LoginPage> {
                             fontSize: 16),
                       ),
                     ),
+                    isEmailCorrect
+                        ? SvgPicture.asset(
+                            "assets/icons/check.svg",
+                            width: 16,
+                            height: 16,
+                          )
+                        : const SizedBox()
                   ],
                 ),
               ),
@@ -98,7 +215,9 @@ class _LoginPageState extends State<LoginPage> {
                   borderRadius: BorderRadius.circular(24),
                   color: const Color(0xFFF9FAFB),
                   border: Border.all(
-                    color: const Color(0xFFE5E7EB),
+                    color: isPassword
+                        ? const Color(0xFFE5E7EB)
+                        : const Color(0xFFFF5C5C),
                     width: 1,
                   ),
                 ),
@@ -106,10 +225,15 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SvgPicture.asset("assets/icons/password.svg",
-                        width: 24, height: 24),
+                        width: 24,
+                        height: 24,
+                        color: isPasswordCorrect
+                            ? const Color(0xFF199A8E)
+                            : const Color(0xFFA1A8B0)),
                     const SizedBox(width: 16),
                     Expanded(
                       child: TextFormField(
+                        controller: _passwordController,
                         textInputAction: TextInputAction.done,
                         keyboardType: TextInputType.emailAddress,
                         decoration: const InputDecoration(
@@ -121,26 +245,65 @@ class _LoginPageState extends State<LoginPage> {
                             fontSize: 16,
                           ),
                         ),
-                        obscureText: true,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please,enter password";
+                          } else if (value.length <= 7) {
+                            return "Enter at least 8 symbols";
+                          } else {
+                            setState(() {
+                              isPasswordCorrect = true;
+                            });
+                          }
+                        },
+                        onChanged: (value) {
+                          if (_key.currentState!.validate()) {
+                            setState(() {
+                              isPasswordCorrect = true;
+                            });
+                          } else {
+                            isPasswordCorrect = false;
+                          }
+                        },
+                        obscureText: seePassword,
                         style: const TextStyle(
                             color: Color(0xFF101623),
                             fontWeight: FontWeight.w500,
                             fontSize: 16),
                       ),
                     ),
-                    SvgPicture.asset(
-                      "assets/icons/eye_slash.svg",
-                      width: 24,
-                      height: 24,
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          seePassword = !seePassword;
+                        });
+                      },
+                      child: SvgPicture.asset(
+                        "assets/icons/eye_slash.svg",
+                        width: 24,
+                        height: 24,
+                      ),
                     )
                   ],
                 ),
               ),
               const SizedBox(height: 8),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+              Row(
+                mainAxisAlignment: isPassword
+                    ? MainAxisAlignment.end
+                    : MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  isPassword
+                      ? const SizedBox()
+                      : const Text(
+                          "*The password you entered is wrong",
+                          style: TextStyle(
+                            color: Color(0xFFFF5C5C),
+                            fontSize: 11,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                  const Text(
                     "Forgot Password?",
                     style: TextStyle(
                       color: Color(0xFF199A8E),
@@ -151,20 +314,25 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
               const SizedBox(height: 32),
-              Container(
-                alignment: Alignment.center,
-                width: double.infinity,
-                height: 56,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(32),
-                  color: const Color(0xFF199A8E),
-                ),
-                child: const Text(
-                  "Login",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16,
+              InkWell(
+                onTap: () {
+                  submit();
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  width: double.infinity,
+                  height: 56,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(32),
+                    color: const Color(0xFF199A8E),
+                  ),
+                  child: const Text(
+                    "Login",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                    ),
                   ),
                 ),
               ),
