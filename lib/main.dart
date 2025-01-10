@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medics/onbording.dart';
+import 'package:medics/pages/onbording.dart';
 
 void main() {
   runApp(const MyApp());

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:medics/login_page.dart';
+import 'package:medics/pages/login_page.dart';
+import 'package:medics/widgets/custom_button_widget.dart';
 
 class Onbording extends StatelessWidget {
   const Onbording({super.key});
@@ -40,62 +41,43 @@ class Onbording extends StatelessWidget {
                   height: 10,
                 ),
                 const Text(
-                  "Login to enjoy the features we've \n       provided, and stay healthy!",
+                  "Login to enjoy the features we've \nprovided, and stay healthy!",
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
                     color: Color(0xFF717784),
                   ),
+                  textAlign: TextAlign.center,
                 ),
               ],
             ),
             const SizedBox(
               height: 60,
             ),
-            Column(
-              children: [
-                SizedBox(
-                  width: 260,
-                  height: 56,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF199A8E),
-                    ),
-                    onPressed: () => Navigator.of(context).push(
-                        MaterialPageRoute(
-                            builder: (context) => const LoginPage())),
-                    child: const Text(
-                      "Login",
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white),
-                    ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const SizedBox(
+                    height: 16,
                   ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                SizedBox(
-                  width: 260,
-                  height: 56,
-                  child: OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                      side: const BorderSide(
-                        color: Color(0xFF199A8E),
-                      ),
-                    ),
-                    onPressed: () {},
-                    child: const Text(
-                      "Sign Up",
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: Color(0xFF199A8E)),
-                    ),
+                  CustomButtonWidget(
+                    title: "Go to home",
+                    onTap: () {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) =>const LoginPage()));
+                    },
                   ),
-                ),
-              ],
+                  const SizedBox(height: 12),
+                  CustomButtonWidget(
+                    title: "Sign Up",
+                    color: Colors.white,
+                    textColor: const Color(0xFF199A8E),
+                    onTap: () {},
+                  ),
+                ],
+              ),
             )
           ],
         ),
