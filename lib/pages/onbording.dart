@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:medics/pages/login_page.dart';
+import 'package:medics/pages/sign_up_page.dart';
 import 'package:medics/widgets/custom_button_widget.dart';
 
 class Onbording extends StatelessWidget {
@@ -63,10 +64,10 @@ class Onbording extends StatelessWidget {
                     height: 16,
                   ),
                   CustomButtonWidget(
-                    title: "Go to home",
+                    title: "Login",
                     onTap: () {
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) =>const LoginPage()));
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const LoginPage()));
                     },
                   ),
                   const SizedBox(height: 12),
@@ -74,7 +75,13 @@ class Onbording extends StatelessWidget {
                     title: "Sign Up",
                     color: Colors.white,
                     textColor: const Color(0xFF199A8E),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => SignUp(),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),

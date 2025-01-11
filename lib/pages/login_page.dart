@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:medics/pages/onbording.dart';
+
 import 'package:medics/widgets/custom_button_widget.dart';
 import 'package:medics/widgets/sign_in_with_widgets.dart';
 import '../functions/app_dialogs.dart';
@@ -91,6 +92,8 @@ class _LoginPageState extends State<LoginPage> {
                   }
                 },
                 decoration: InputDecoration(
+                  filled: true,
+                  fillColor: const Color(0xFFF9FAFB),
                   prefixIcon: Container(
                     height: 40,
                     width: 40,
@@ -157,6 +160,8 @@ class _LoginPageState extends State<LoginPage> {
                 textInputAction: TextInputAction.done,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
+                  filled: true,
+                  fillColor: const Color(0xFFF9FAFB),
                   prefixIcon: Container(
                     width: 40,
                     height: 40,
@@ -219,6 +224,7 @@ class _LoginPageState extends State<LoginPage> {
                     setState(() {
                       isPasswordCorrect = true;
                     });
+                    return "";
                   }
                 },
                 onChanged: (value) {
@@ -373,7 +379,14 @@ class _LoginPageState extends State<LoginPage> {
       setState(() {
         isPassword = true;
       });
-      AppDialogs.showSuccesDialog(context);
+      AppDialogs.showSuccesDialog(
+        context,
+        "Yeay! Welcome Back",
+        "Once again you login successfully \ninto medidoc app",
+        "Go to home",
+        () => Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (ctx) => const Onbording())),
+      );
     }
   }
 }
