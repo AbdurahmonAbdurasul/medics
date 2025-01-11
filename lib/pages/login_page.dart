@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:medics/pages/forgot_password_page.dart';
 import 'package:medics/pages/onbording.dart';
 
 import 'package:medics/widgets/custom_button_widget.dart';
@@ -258,14 +259,19 @@ class _LoginPageState extends State<LoginPage> {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                  const Text(
-                    "Forgot Password?",
-                    style: TextStyle(
-                      color: Color(0xFF199A8E),
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  )
+                  TextButton(
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const ForgotPasswordPage()));
+                      },
+                      child: const Text(
+                        "Forgot Password?",
+                        style: TextStyle(
+                          color: Color(0xFF199A8E),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ))
                 ],
               ),
               const SizedBox(height: 32),
