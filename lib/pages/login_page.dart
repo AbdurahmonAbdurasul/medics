@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:medics/pages/forgot_password_page.dart';
 import 'package:medics/pages/onbording.dart';
+import 'package:medics/pages/sign_up_page.dart';
 
 import 'package:medics/widgets/custom_button_widget.dart';
 import 'package:medics/widgets/sign_in_with_widgets.dart';
@@ -262,7 +263,7 @@ class _LoginPageState extends State<LoginPage> {
                   TextButton(
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const ForgotPasswordPage()));
+                            builder: (context) => ForgotPasswordPage()));
                       },
                       child: const Text(
                         "Forgot Password?",
@@ -296,7 +297,10 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const SignUp()));
+                    },
                     child: const Text(
                       "Sign Up",
                       style: TextStyle(
