@@ -376,24 +376,32 @@ class _SignUpState extends State<SignUp> {
                     }),
               ]),
               const SizedBox(height: 24),
-              const Text.rich(
-                TextSpan(
-                  children: [
-                    TextSpan(
-                        text: "Have an account? ",
-                        style: TextStyle(
-                            color: Color(0xFF717784),
-                            fontSize: 15,
-                            fontWeight: FontWeight.w400)),
-                    TextSpan(
-                        text: "Login",
-                        style: TextStyle(
-                            color: Color(0xFF199A8E),
-                            fontSize: 15,
-                            fontWeight: FontWeight.w400))
-                  ],
-                ),
-              )
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    "Have an account? ",
+                    style: TextStyle(
+                        color: Color(0xFF717784),
+                        fontSize: 15,
+                        fontWeight: FontWeight.w400),
+                  ),
+                  InkWell(
+                    onTap: () => Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => const LoginPage(),
+                      ),
+                    ),
+                    child: const Text(
+                      "Login",
+                      style: TextStyle(
+                          color: Color(0xFF199A8E),
+                          fontSize: 15,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),

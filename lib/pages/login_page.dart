@@ -207,15 +207,16 @@ class _LoginPageState extends State<LoginPage> {
                     fontSize: 16,
                   ),
                   suffixIcon: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        seePassword = !seePassword;
-                      });
-                    },
-                    icon: Icon(seePassword
-                        ? Icons.remove_red_eye
-                        : Icons.remove_red_eye_outlined),
-                  ),
+                      onPressed: () {
+                        setState(() {
+                          seePassword = !seePassword;
+                        });
+                      },
+                      icon: SvgPicture.asset(
+                        "assets/icons/eye_slash.svg",
+                        width: 24,
+                        height: 24,
+                      )),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
