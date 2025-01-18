@@ -244,7 +244,7 @@ class _LoginPageState extends State<LoginPage> {
                     fontWeight: FontWeight.w500,
                     fontSize: 16),
               ),
-              const SizedBox(height: 8),
+              //const SizedBox(height: 18),
               Row(
                 mainAxisAlignment: isPassword
                     ? MainAxisAlignment.end
@@ -263,7 +263,7 @@ class _LoginPageState extends State<LoginPage> {
                   TextButton(
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => ForgotPasswordPage()));
+                            builder: (context) => const ForgotPasswordPage()));
                       },
                       child: const Text(
                         "Forgot Password?",

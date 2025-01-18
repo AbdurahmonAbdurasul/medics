@@ -31,13 +31,15 @@ class SignInWithWidgets extends StatelessWidget {
             height: 20,
             width: 19.58,
           ),
-          const SizedBox(width: 76),
-           Text(
-            title,
-            style:const TextStyle(
-              color: Color(0xFF101623),
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
+          Expanded(
+            child: Text(
+              title,
+              style: const TextStyle(
+                color: Color(0xFF101623),
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+              ),
+              textAlign: TextAlign.center,
             ),
           ),
         ],

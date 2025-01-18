@@ -5,7 +5,7 @@ import 'package:medics/pages/login_page.dart';
 import 'package:medics/widgets/custom_button_widget.dart';
 
 class SignUp extends StatefulWidget {
- const SignUp({super.key});
+  const SignUp({super.key});
 
   @override
   State<SignUp> createState() => _SignUpState();
@@ -296,22 +296,29 @@ class _SignUpState extends State<SignUp> {
               const SizedBox(height: 16),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Checkbox(
-                      splashRadius: 0,
-                      side: const BorderSide(
-                          width: 1.5, color: Color(0xFFD3D6DA)),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8)),
-                      value: isChecked,
-                      activeColor: Colors.white,
-                      checkColor: const Color(0xFF199A8E),
-                      onChanged: (bool? value) {
-                        setState(() {
-                          isChecked = value!;
-                        });
-                      }),
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        isChecked = !isChecked;
+                      });
+                    },
+                    child: Container(
+                      width: 24,
+                      height: 24,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFFFFFF),
+                        border: Border.all(
+                            width: 1.5, color: const Color(0xFFD3D6DA)),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: isChecked
+                          ? SvgPicture.asset("assets/icons/check.svg",
+                              width: 16, height: 16)
+                          : const SizedBox(),
+                    ),
+                  ),
+                  const SizedBox(width: 16),
                   const Expanded(
                     child: Text.rich(
                       TextSpan(
