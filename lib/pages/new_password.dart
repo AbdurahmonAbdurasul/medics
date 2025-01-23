@@ -3,9 +3,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:medics/functions/app_dialogs.dart';
 import 'package:medics/pages/login_page.dart';
 import 'package:medics/widgets/custom_button_widget.dart';
+import 'package:medics/widgets/custom_textff_password.dart';
 
 class NewPassword extends StatefulWidget {
-  NewPassword({super.key});
+  const NewPassword({super.key});
 
   @override
   State<NewPassword> createState() => _NewPasswordState();
@@ -66,66 +67,12 @@ class _NewPasswordState extends State<NewPassword> {
                       fontSize: 16,
                       fontWeight: FontWeight.w400)),
               const SizedBox(height: 24),
-              TextFormField(
-                controller: _passwordController,
-                textInputAction: TextInputAction.done,
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: const Color(0xFFF9FAFB),
-                  prefixIcon: Container(
-                    width: 40,
-                    height: 40,
-                    alignment: Alignment.center,
-                    child: SvgPicture.asset(
-                      "assets/icons/password.svg",
-                      width: 24,
-                      height: 24,
-                      color: isPasswordCorrect
-                          ? const Color(0xFF199A8E)
-                          : const Color(0xFFA1A8B0),
-                    ),
-                  ),
-                  hintText: "New password",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(24),
-                    borderSide:
-                        const BorderSide(width: 1, color: Color(0xFFE5E7EB)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(24),
-                    borderSide:
-                        const BorderSide(width: 2, color: Color(0xFFE5E7EB)),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(24),
-                    borderSide:
-                        const BorderSide(width: 1, color: Color(0xFFE5E7EB)),
-                  ),
-                  disabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(24),
-                    borderSide: const BorderSide(width: 1, color: Colors.black),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(24),
-                    borderSide: const BorderSide(width: 1, color: Colors.red),
-                  ),
-                  hintStyle: const TextStyle(
-                    color: Color(0xFFA1A8B0),
-                    fontWeight: FontWeight.w400,
-                    fontSize: 16,
-                  ),
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        seePassword = !seePassword;
-                      });
-                    },
-                    icon: Icon(seePassword
-                        ? Icons.remove_red_eye
-                        : Icons.remove_red_eye_outlined),
-                  ),
-                ),
+              CustomTextFFPassword(
+                formKey: _formKey,
+                isCorrect: isPasswordCorrect,
+                assetName: "assets/icons/password.svg",
+                hintText: "New password",
+                seePassword: seePassword,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return "Please,enter new password";
@@ -137,82 +84,15 @@ class _NewPasswordState extends State<NewPassword> {
                     });
                   }
                 },
-                onChanged: (value) {
-                  if (_formKey.currentState!.validate()) {
-                    setState(() {
-                      isPasswordCorrect = true;
-                    });
-                  } else {
-                    isPasswordCorrect = false;
-                  }
-                },
-                obscureText: seePassword,
-                style: const TextStyle(
-                    color: Color(0xFF101623),
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16),
+                suffixIcon: "assets/icons/eye_slash.svg",
               ),
               const SizedBox(height: 16),
-              TextFormField(
-                controller: _confirmPassController,
-                textInputAction: TextInputAction.done,
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: const Color(0xFFF9FAFB),
-                  prefixIcon: Container(
-                    width: 40,
-                    height: 40,
-                    alignment: Alignment.center,
-                    child: SvgPicture.asset(
-                      "assets/icons/password.svg",
-                      width: 24,
-                      height: 24,
-                      color: isPasswordCorrect
-                          ? const Color(0xFF199A8E)
-                          : const Color(0xFFA1A8B0),
-                    ),
-                  ),
-                  hintText: "Confirm password",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(24),
-                    borderSide:
-                        const BorderSide(width: 1, color: Color(0xFFE5E7EB)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(24),
-                    borderSide:
-                        const BorderSide(width: 2, color: Color(0xFFE5E7EB)),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(24),
-                    borderSide:
-                        const BorderSide(width: 1, color: Color(0xFFE5E7EB)),
-                  ),
-                  disabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(24),
-                    borderSide: const BorderSide(width: 1, color: Colors.black),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(24),
-                    borderSide: const BorderSide(width: 1, color: Colors.red),
-                  ),
-                  hintStyle: const TextStyle(
-                    color: Color(0xFFA1A8B0),
-                    fontWeight: FontWeight.w400,
-                    fontSize: 16,
-                  ),
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        seeConPassword = !seeConPassword;
-                      });
-                    },
-                    icon: Icon(seePassword
-                        ? Icons.remove_red_eye
-                        : Icons.remove_red_eye_outlined),
-                  ),
-                ),
+              CustomTextFFPassword(
+                formKey: _formKey,
+                isCorrect: isPasswordCorrect,
+                assetName: "assets/icons/password.svg",
+                hintText: "Confirm password",
+                seePassword: seePassword,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return "Please,enter new password";
@@ -224,20 +104,7 @@ class _NewPasswordState extends State<NewPassword> {
                     });
                   }
                 },
-                onChanged: (value) {
-                  if (_formKey.currentState!.validate()) {
-                    setState(() {
-                      isPasswordCorrect = true;
-                    });
-                  } else {
-                    isPasswordCorrect = false;
-                  }
-                },
-                obscureText: seeConPassword,
-                style: const TextStyle(
-                    color: Color(0xFF101623),
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16),
+                suffixIcon: "assets/icons/eye_slash.svg",
               ),
               const SizedBox(height: 24),
               Column(

@@ -6,6 +6,8 @@ import 'package:medics/pages/onbording.dart';
 import 'package:medics/pages/sign_up_page.dart';
 
 import 'package:medics/widgets/custom_button_widget.dart';
+import 'package:medics/widgets/custom_textff_email.dart';
+import 'package:medics/widgets/custom_textff_password.dart';
 import 'package:medics/widgets/sign_in_with_widgets.dart';
 import '../functions/app_dialogs.dart';
 
@@ -66,10 +68,11 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             children: [
               const SizedBox(height: 24),
-              TextFormField(
-                controller: _emailController,
-                textInputAction: TextInputAction.next,
-                keyboardType: TextInputType.emailAddress,
+              CustomTextFFEmail(
+                formKey: _key,
+                assetName: "assets/icons/sms.svg",
+                isCorrect: isEmailCorrect,
+                hintText: "Enter your email",
                 validator: (value) {
                   if (value!.isEmpty) {
                     return "Please,enter your email";
@@ -82,200 +85,76 @@ class _LoginPageState extends State<LoginPage> {
                     return null;
                   }
                 },
-                onChanged: (value) {
-                  if (_key.currentState!.validate()) {
-                    setState(() {
-                      isEmailCorrect = true;
-                    });
-                  } else {
-                    setState(() {
-                      isEmailCorrect = false;
-                    });
-                  }
-                },
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: const Color(0xFFF9FAFB),
-                  prefixIcon: Container(
-                    height: 40,
-                    width: 40,
-                    alignment: Alignment.center,
-                    child: SvgPicture.asset(
-                      "assets/icons/sms.svg",
-                      width: 24,
-                      height: 24,
-                      color: isEmailCorrect
-                          ? const Color(0xFF199A8E)
-                          : const Color(0xFFA1A8B0),
-                    ),
-                  ),
-                  hintText: "Enter your email",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(24),
-                    borderSide:
-                        const BorderSide(width: 1, color: Color(0xFFE5E7EB)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(24),
-                    borderSide:
-                        const BorderSide(width: 2, color: Color(0xFFE5E7EB)),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(24),
-                    borderSide:
-                        const BorderSide(width: 1, color: Color(0xFFE5E7EB)),
-                  ),
-                  disabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(24),
-                    borderSide: const BorderSide(width: 1, color: Colors.black),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(24),
-                    borderSide: const BorderSide(width: 1, color: Colors.red),
-                  ),
-                  hintStyle: const TextStyle(
-                    color: Color(0xFFA1A8B0),
-                    fontWeight: FontWeight.w400,
-                    fontSize: 16,
-                  ),
-                  suffixIcon: isEmailCorrect
-                      ? Container(
-                          width: 30,
-                          height: 30,
-                          alignment: Alignment.center,
-                          child: SvgPicture.asset(
-                            "assets/icons/check.svg",
-                            width: 16,
-                            height: 16,
-                          ),
-                        )
-                      : const SizedBox(),
-                ),
-                style: const TextStyle(
-                    color: Color(0xFF101623),
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16),
+                suffixIcon: "assets/icons/check.svg",
               ),
+
               const SizedBox(height: 16),
-              TextFormField(
-                controller: _passwordController,
-                textInputAction: TextInputAction.done,
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: const Color(0xFFF9FAFB),
-                  prefixIcon: Container(
-                    width: 40,
-                    height: 40,
-                    alignment: Alignment.center,
-                    child: SvgPicture.asset(
-                      "assets/icons/password.svg",
-                      width: 24,
-                      height: 24,
-                      color: isPasswordCorrect
-                          ? const Color(0xFF199A8E)
-                          : const Color(0xFFA1A8B0),
-                    ),
-                  ),
-                  hintText: "Enter your password",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(24),
-                    borderSide:
-                        const BorderSide(width: 1, color: Color(0xFFE5E7EB)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(24),
-                    borderSide:
-                        const BorderSide(width: 2, color: Color(0xFFE5E7EB)),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(24),
-                    borderSide:
-                        const BorderSide(width: 1, color: Color(0xFFE5E7EB)),
-                  ),
-                  disabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(24),
-                    borderSide: const BorderSide(width: 1, color: Colors.black),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(24),
-                    borderSide: const BorderSide(width: 1, color: Colors.red),
-                  ),
-                  hintStyle: const TextStyle(
-                    color: Color(0xFFA1A8B0),
-                    fontWeight: FontWeight.w400,
-                    fontSize: 16,
-                  ),
-                  suffixIcon: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          seePassword = !seePassword;
-                        });
+              SizedBox(
+                height: 95,
+                child: Stack(
+                  children: [
+                    CustomTextFFPassword(
+                      formKey: _key,
+                      isCorrect: isPasswordCorrect,
+                      assetName: "assets/icons/password.svg",
+                      hintText: "Enter your password",
+                      seePassword: seePassword,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Please,enter password";
+                        } else if (value.length <= 7) {
+                          return "Enter at least 8 symbols";
+                        } else {
+                          setState(() {
+                            isPasswordCorrect = true;
+                          });
+                          return "";
+                        }
                       },
-                      icon: SvgPicture.asset(
-                        "assets/icons/eye_slash.svg",
-                        width: 24,
-                        height: 24,
-                      )),
+                      suffixIcon: "assets/icons/eye_slash.svg",
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: TextButton(
+                          style: ButtonStyle(
+                              overlayColor:
+                                  WidgetStateProperty.all(Colors.transparent)),
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) =>
+                                    const ForgotPasswordPage()));
+                          },
+                          child: const Text(
+                            "Forgot Password?",
+                            style: TextStyle(
+                              color: Color(0xFF199A8E),
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          )),
+                    )
+                  ],
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return "Please,enter password";
-                  } else if (value.length <= 7) {
-                    return "Enter at least 8 symbols";
-                  } else {
-                    setState(() {
-                      isPasswordCorrect = true;
-                    });
-                    return "";
-                  }
-                },
-                onChanged: (value) {
-                  if (_key.currentState!.validate()) {
-                    setState(() {
-                      isPasswordCorrect = true;
-                    });
-                  } else {
-                    isPasswordCorrect = false;
-                  }
-                },
-                obscureText: seePassword,
-                style: const TextStyle(
-                    color: Color(0xFF101623),
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16),
               ),
               //const SizedBox(height: 18),
-              Row(
-                mainAxisAlignment: isPassword
-                    ? MainAxisAlignment.end
-                    : MainAxisAlignment.spaceBetween,
-                children: [
-                  isPassword
-                      ? const SizedBox()
-                      : const Text(
-                          "*The password you entered is wrong",
-                          style: TextStyle(
-                            color: Color(0xFFFF5C5C),
-                            fontSize: 11,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                  TextButton(
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const ForgotPasswordPage()));
-                      },
-                      child: const Text(
-                        "Forgot Password?",
-                        style: TextStyle(
-                          color: Color(0xFF199A8E),
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ))
-                ],
-              ),
+              // Row(
+              //   mainAxisAlignment: isPassword
+              //       ? MainAxisAlignment.end
+              //       : MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     isPassword
+              //         ? const SizedBox()
+              //         : const Text(
+              //             "*The password you entered is wrong",
+              //             style: TextStyle(
+              //               color: Color(0xFFFF5C5C),
+              //               fontSize: 11,
+              //               fontWeight: FontWeight.w500,
+              //             ),
+              //           ),
+              //   ],
+              // ),
               const SizedBox(height: 32),
               Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
                 CustomButtonWidget(

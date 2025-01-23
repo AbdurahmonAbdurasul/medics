@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:medics/pages/verification_page.dart';
 import 'package:medics/widgets/custom_button_widget.dart';
+import 'package:medics/widgets/custom_textff_email.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({super.key});
@@ -13,8 +14,6 @@ class ForgotPasswordPage extends StatefulWidget {
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   final _formKey = GlobalKey<FormState>();
 
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _phoneNumberController = TextEditingController();
   bool isEmailCorrect = false;
   bool isPhoneNumberCorrect = false;
 
@@ -104,10 +103,11 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       Column(
                         children: [
                           const SizedBox(height: 24),
-                          TextFormField(
-                            controller: _emailController,
-                            textInputAction: TextInputAction.next,
-                            keyboardType: TextInputType.emailAddress,
+                          CustomTextFFEmail(
+                            formKey: _formKey,
+                            isCorrect: isEmailCorrect,
+                            assetName: "assets/icons/sms.svg",
+                            hintText: "Enter your email",
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "Please,enter your email";
@@ -120,161 +120,31 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                 return null;
                               }
                             },
-                            onChanged: (value) {
-                              if (_formKey.currentState!.validate()) {
-                                setState(() {
-                                  isEmailCorrect = true;
-                                });
-                              } else {
-                                setState(() {
-                                  isEmailCorrect = false;
-                                });
-                              }
-                            },
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: const Color(0xFFF9FAFB),
-                              prefixIcon: Container(
-                                height: 40,
-                                width: 40,
-                                alignment: Alignment.center,
-                                child: SvgPicture.asset(
-                                  "assets/icons/sms.svg",
-                                  width: 24,
-                                  height: 24,
-                                  color: isEmailCorrect
-                                      ? const Color(0xFF199A8E)
-                                      : const Color(0xFFA1A8B0),
-                                ),
-                              ),
-                              hintText: "Enter your email",
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(24),
-                                borderSide: const BorderSide(
-                                    width: 1, color: Color(0xFFE5E7EB)),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(24),
-                                borderSide: const BorderSide(
-                                    width: 2, color: Color(0xFFE5E7EB)),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(24),
-                                borderSide: const BorderSide(
-                                    width: 1, color: Color(0xFFE5E7EB)),
-                              ),
-                              disabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(24),
-                                borderSide: const BorderSide(
-                                    width: 1, color: Colors.black),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(24),
-                                borderSide: const BorderSide(
-                                    width: 1, color: Colors.red),
-                              ),
-                              hintStyle: const TextStyle(
-                                color: Color(0xFFA1A8B0),
-                                fontWeight: FontWeight.w400,
-                                fontSize: 16,
-                              ),
-                              suffixIcon: isEmailCorrect
-                                  ? Container(
-                                      width: 30,
-                                      height: 30,
-                                      alignment: Alignment.center,
-                                      child: SvgPicture.asset(
-                                        "assets/icons/check.svg",
-                                        width: 16,
-                                        height: 16,
-                                      ),
-                                    )
-                                  : const SizedBox(),
-                            ),
-                            style: const TextStyle(
-                                color: Color(0xFF101623),
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16),
-                          ),
+                            suffixIcon: "assets/icons/check.svg",
+                          )
                         ],
                       ),
                       Column(
                         children: [
                           const SizedBox(height: 24),
-                          TextFormField(
-                            controller: _phoneNumberController,
-                            textInputAction: TextInputAction.done,
-                            keyboardType: TextInputType.number,
+                          CustomTextFFEmail(
+                            formKey: _formKey,
+                            isCorrect: isPhoneNumberCorrect,
+                            assetName: "assets/icons/call.svg",
+                            hintText: "Enter your phone number",
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "Please,enter your phone number";
                               } else if (value.length < 9) {
                                 return "Please,enter correct email";
-                              }
-                            },
-                            onChanged: (value) {
-                              if (_formKey.currentState!.validate()) {
-                                setState(() {
-                                  isEmailCorrect = true;
-                                });
                               } else {
                                 setState(() {
-                                  isEmailCorrect = false;
+                                  isPhoneNumberCorrect = true;
                                 });
                               }
                             },
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: const Color(0xFFF9FAFB),
-                              prefixIcon: Container(
-                                height: 40,
-                                width: 40,
-                                alignment: Alignment.center,
-                                child: SvgPicture.asset(
-                                  "assets/icons/call.svg",
-                                  width: 24,
-                                  height: 24,
-                                  color: isEmailCorrect
-                                      ? const Color(0xFF199A8E)
-                                      : const Color(0xFFA1A8B0),
-                                ),
-                              ),
-                              hintText: "Enter your phone number",
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(24),
-                                borderSide: const BorderSide(
-                                    width: 1, color: Color(0xFFE5E7EB)),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(24),
-                                borderSide: const BorderSide(
-                                    width: 2, color: Color(0xFFE5E7EB)),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(24),
-                                borderSide: const BorderSide(
-                                    width: 1, color: Color(0xFFE5E7EB)),
-                              ),
-                              disabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(24),
-                                borderSide: const BorderSide(
-                                    width: 1, color: Colors.black),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(24),
-                                borderSide: const BorderSide(
-                                    width: 1, color: Colors.red),
-                              ),
-                              hintStyle: const TextStyle(
-                                color: Color(0xFFA1A8B0),
-                                fontWeight: FontWeight.w400,
-                                fontSize: 16,
-                              ),
-                            ),
-                            style: const TextStyle(
-                                color: Color(0xFF101623),
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16),
+                            textType: TextInputType.number,
+                            suffixIcon: "assets/icons/check.svg",
                           ),
                         ],
                       ),

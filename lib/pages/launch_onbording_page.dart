@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medics/pages/onbording.dart';
+import 'package:medics/widgets/custom_page_view.dart';
 
 class LaunchOnbordingPage extends StatefulWidget {
   const LaunchOnbordingPage({super.key});
@@ -46,110 +47,19 @@ class _LaunchOnbordingPageState extends State<LaunchOnbordingPage> {
                           currentIndex = index;
                           setState(() {});
                         },
-                        children: [
-                          Stack(children: [
-                            Column(
-                              children: [
-                                Expanded(
-                                    flex: 3,
-                                    child: Image.asset(
-                                        "assets/images/slider_one.png")),
-                                Expanded(
-                                    flex: 2,
-                                    child: Container(
-                                      padding: const EdgeInsets.only(
-                                          right: 16, left: 17, top: 50),
-                                      decoration: const BoxDecoration(
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(24),
-                                          topRight: Radius.circular(24),
-                                        ),
-                                        gradient: LinearGradient(
-                                            colors: [
-                                              Color(0xFFF5F7FF),
-                                              Color(0xFFFFFFFF),
-                                            ],
-                                            begin: Alignment.topCenter,
-                                            end: Alignment.bottomCenter),
-                                      ),
-                                      child: const Text(
-                                        "Consult only with a doctor you trust",
-                                        style: TextStyle(
-                                            fontSize: 22,
-                                            fontWeight: FontWeight.w700,
-                                            color: Color(0xFF101623)),
-                                      ),
-                                    )),
-                              ],
-                            ),
-                          ]),
-                          Column(
-                            children: [
-                              Expanded(
-                                  flex: 3,
-                                  child: Image.asset(
-                                      "assets/images/slider_two.png")),
-                              Expanded(
-                                  flex: 2,
-                                  child: Container(
-                                    padding: const EdgeInsets.only(
-                                        right: 16, left: 17, top: 50),
-                                    decoration: const BoxDecoration(
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(24),
-                                        topRight: Radius.circular(24),
-                                      ),
-                                      gradient: LinearGradient(
-                                          colors: [
-                                            Color(0xFFF5F7FF),
-                                            Color(0xFFFFFFFF),
-                                          ],
-                                          begin: Alignment.topCenter,
-                                          end: Alignment.bottomCenter),
-                                    ),
-                                    child: const Text(
-                                      "Find a lot of specialist doctors in one place",
-                                      style: TextStyle(
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.w700,
-                                          color: Color(0xFF101623)),
-                                    ),
-                                  )),
-                            ],
+                        children: const [
+                          CustomPageView(
+                            assetPath: "assets/images/slider_one.png",
+                            title: "Consult only with a doctor you trust",
                           ),
-                          Column(
-                            children: [
-                              Expanded(
-                                  flex: 3,
-                                  child: Image.asset(
-                                      "assets/images/slider_three.png")),
-                              Expanded(
-                                  flex: 2,
-                                  child: Container(
-                                    padding: const EdgeInsets.only(
-                                        right: 16, left: 17, top: 50),
-                                    decoration: const BoxDecoration(
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(24),
-                                        topRight: Radius.circular(24),
-                                      ),
-                                      gradient: LinearGradient(
-                                          colors: [
-                                            Color(0xFFF5F7FF),
-                                            Color(0xFFFFFFFF),
-                                          ],
-                                          begin: Alignment.topCenter,
-                                          end: Alignment.bottomCenter),
-                                    ),
-                                    child: const Text(
-                                      "Get connect our Online Consultation",
-                                      style: TextStyle(
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.w700,
-                                          color: Color(0xFF101623)),
-                                    ),
-                                  )),
-                            ],
+                          CustomPageView(
+                            assetPath: "assets/images/slider_two.png",
+                            title:
+                                "Find a lot of specialist doctors in one place",
+                          ),
+                          CustomPageView(
+                            assetPath: "assets/images/slider_three.png",
+                            title: "Get connect our Online Consultation",
                           ),
                         ],
                       ),
