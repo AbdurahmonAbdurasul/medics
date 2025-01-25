@@ -81,7 +81,7 @@ class VerificationPage extends StatelessWidget {
                 CustomButtonWidget(
                     title: "Verify",
                     onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) =>  NewPassword()))),
+                        builder: (context) => NewPassword()))),
               ],
             ),
             const SizedBox(height: 24),
