@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medics/pages/launch_onbording_page.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:medics/pages/main_pages.dart';
 
 void main() {
   // WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -31,7 +32,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LaunchOnbordingPage(),
+      home: MainPages(),
     );
   }
 }
