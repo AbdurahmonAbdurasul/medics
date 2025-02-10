@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomDoctorWidget extends StatelessWidget {
-  const CustomDoctorWidget({super.key});
+  final bool showBorder;
+  const CustomDoctorWidget({super.key,this.showBorder=true});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,7 @@ class CustomDoctorWidget extends StatelessWidget {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(11),
           shape: BoxShape.rectangle,
-          border: Border.all(color:const Color(0xFFE8F3F1),width: 1),
+          border: showBorder?Border.all(color:const Color(0xFFE8F3F1),width: 1):Border.all(color:const Color(0xFFFFFFFF),width: 1),
           color:const Color(0xFFFFFFFF)
       ),
       child: Row(
