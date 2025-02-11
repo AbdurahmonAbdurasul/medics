@@ -29,9 +29,9 @@ class CustomPageView extends StatelessWidget {
                     Color(0xFFFFFFFF),
                   ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
                 ),
-                child:  Text(
+                child: Text(
                   title,
-                  style:const TextStyle(
+                  style: const TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.w700,
                       color: Color(0xFF101623)),

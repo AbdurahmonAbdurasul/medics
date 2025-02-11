@@ -9,16 +9,15 @@ class CustomTextFFEmail extends StatefulWidget {
   final String hintText;
   final String? suffixIcon;
   final TextInputType? textType;
-  CustomTextFFEmail({
-    super.key,
-    required this.formKey,
-    required this.isCorrect,
-    this.validator,
-    required this.assetName,
-    required this.hintText,
-    this.suffixIcon,
-    this.textType
-  });
+  CustomTextFFEmail(
+      {super.key,
+      required this.formKey,
+      required this.isCorrect,
+      this.validator,
+      required this.assetName,
+      required this.hintText,
+      this.suffixIcon,
+      this.textType});
 
   @override
   State<CustomTextFFEmail> createState() => _CustomTextFormFieldState();
@@ -32,7 +31,7 @@ class _CustomTextFormFieldState extends State<CustomTextFFEmail> {
     return TextFormField(
       controller: _controller,
       textInputAction: TextInputAction.next,
-      keyboardType:widget.textType,
+      keyboardType: widget.textType,
       validator: widget.validator,
       onChanged: (value) {
         if (widget.formKey.currentState!.validate()) {
