@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:medics/pages/find_doctors_page.dart';
 import 'package:medics/pages/topDoctors_list_page.dart';
+import 'package:medics/widgets/custom_category_item.dart';
+import 'package:medics/widgets/custom_textff_search.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -36,171 +39,46 @@ class HomePage extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            TextField(
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: const Color(0xFFFBFBFB),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(24),
-                  borderSide:
-                      const BorderSide(width: 1, color: Color(0xFFE8F3F1)),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(24),
-                  borderSide:
-                      const BorderSide(width: 2, color: Color(0xFFE8F3F1)),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(24),
-                  borderSide:
-                      const BorderSide(width: 1, color: Color(0xFFE8F3F1)),
-                ),
-                disabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(24),
-                  borderSide: const BorderSide(width: 1, color: Colors.black),
-                ),
-                errorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(24),
-                  borderSide: const BorderSide(width: 1, color: Colors.red),
-                ),
-                prefixIcon: Container(
-                    width: 20,
-                    height: 20,
-                    alignment: Alignment.center,
-                    child: SvgPicture.asset(
-                      "assets/icons/search.svg",
-                      width: 18,
-                      height: 18,
-                    )),
-                hintStyle: const TextStyle(
-                    color: Color(0xFFADADAD),
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400),
-                hintText: "Search doctor, drugs, articles...",
-              ),
-            ),
+            const CustomTextFFSearch(
+                hintText: "Search doctor, drugs, articles..."),
             const SizedBox(
               height: 12,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
-                    child: Column(
-                  children: [
-                    Container(
-                      width: 64,
-                      height: 56,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          shape: BoxShape.rectangle,
-                          color: const Color(0xFFFFFFFF)),
-                      child: SvgPicture.asset(
-                        "assets/icons/doctor.svg",
-                        width: 32,
-                        height: 32,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    const Text(
-                      "Doctor",
-                      style: TextStyle(
-                          color: Color(0xFFA1A8B0),
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14),
-                    ),
-                  ],
-                )),
-                Expanded(
-                    child: Column(
-                  children: [
-                    Container(
-                      width: 64,
-                      height: 56,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          shape: BoxShape.rectangle,
-                          color: const Color(0xFFFFFFFF)),
-                      child: SvgPicture.asset(
-                        "assets/icons/pharmacy.svg",
-                        width: 32,
-                        height: 32,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    const Text(
-                      "Pharmacy",
-                      style: TextStyle(
-                          color: Color(0xFFA1A8B0),
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14),
-                    ),
-                  ],
-                )),
-                Expanded(
-                    child: Column(
-                  children: [
-                    Container(
-                      width: 64,
-                      height: 56,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          shape: BoxShape.rectangle,
-                          color: const Color(0xFFFFFFFF)),
-                      child: SvgPicture.asset(
-                        "assets/icons/hospital.svg",
-                        width: 32,
-                        height: 32,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    const Text(
-                      "Hospital",
-                      style: TextStyle(
-                          color: Color(0xFFA1A8B0),
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14),
-                    ),
-                  ],
-                )),
-                Expanded(
-                    child: Column(
-                  children: [
-                    Container(
-                      width: 64,
-                      height: 56,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          shape: BoxShape.rectangle,
-                          color: const Color(0xFFFFFFFF)),
-                      child: SvgPicture.asset(
-                        "assets/icons/ambulance.svg",
-                        width: 32,
-                        height: 32,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    const Text(
-                      "Ambulance",
-                      style: TextStyle(
-                          color: Color(0xFFA1A8B0),
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14),
-                    ),
-                  ],
-                )),
+                CustomCategoryItem(
+                    function: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const FindDoctorsPage(),
+                          ),
+                        ),
+                    icon: "assets/icons/doctor.svg",
+                    title: "Doctor"),
+                CustomCategoryItem(
+                    function: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const FindDoctorsPage(),
+                          ),
+                        ),
+                    icon: "assets/icons/pharmacy.svg",
+                    title: "Pharmacy"),
+                CustomCategoryItem(
+                    function: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const FindDoctorsPage(),
+                          ),
+                        ),
+                    icon: "assets/icons/hospital.svg",
+                    title: "Hospital"),
+                CustomCategoryItem(
+                    function: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const FindDoctorsPage(),
+                          ),
+                        ),
+                    icon: "assets/icons/ambulance.svg",
+                    title: "Ambulance"),
               ],
             ),
             const SizedBox(height: 16),
@@ -331,13 +209,14 @@ class HomePage extends StatelessWidget {
                                 children: [
                                   SvgPicture.asset(
                                       "assets/icons/star_rectangle.svg"),
-                                  Positioned(
+                                   Positioned(
+                                     top: 2,
+                                    left: 2,
                                     child: SvgPicture.asset(
                                         "assets/icons/star.svg"),
-                                    top: 2,
-                                    left: 2,
+
                                   ),
-                                  Positioned(
+                                 const Positioned(
                                       top: 1.5,
                                       right: 2,
                                       child: const Text(
