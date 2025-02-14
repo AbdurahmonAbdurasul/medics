@@ -5,6 +5,8 @@ import 'package:medics/pages/chat_page.dart';
 import 'package:medics/widgets/custom_button_widget.dart';
 import 'package:medics/widgets/custom_doctor_widget.dart';
 
+
+
 class DoctorDetailPage extends StatefulWidget {
   const DoctorDetailPage({super.key});
 
@@ -82,6 +84,7 @@ class _DoctorDetailPageState extends State<DoctorDetailPage> {
               ),
             ),
             const SizedBox(height: 30),
+
             const SizedBox(height: 30),
             const Divider(
               thickness: 1,
@@ -111,8 +114,9 @@ class _DoctorDetailPageState extends State<DoctorDetailPage> {
               children: [
                 InkWell(
                   borderRadius: BorderRadius.circular(15),
-                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const ChatPage())),
+                  onTap: () =>
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const ChatPage())),
                   child: Container(
                     width: 50,
                     height: 50,
@@ -132,8 +136,9 @@ class _DoctorDetailPageState extends State<DoctorDetailPage> {
                   height: 50,
                   child: CustomButtonWidget(
                       title: "Book Appointment",
-                      onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const AppointmentPage()))),
+                      onTap: () =>
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const AppointmentPage()))),
                 ),
               ],
             ),

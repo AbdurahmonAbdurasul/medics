@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:medics/pages/doctor_detail_page.dart';
 import 'package:medics/widgets/custom_category_item.dart';
 import 'package:medics/widgets/custom_textff_search.dart';
 
@@ -129,106 +130,111 @@ class FindDoctorsPage extends StatelessWidget {
                   fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 12),
-            Container(
-              padding: const EdgeInsets.only(top: 20, left: 26, right: 10),
-              width: double.infinity,
-              height: 130,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  color: const Color(0xFFFFFFFF),
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(
-                    color: const Color(0xFFE8F3F1),
-                    width: 1,
-                  )),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const CircleAvatar(
-                    radius: 44,
-                    backgroundImage: AssetImage("assets/images/cedric.png"),
-                  ),
-                  const SizedBox(
-                    width: 24,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Dr. Marcus Horizon",
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Color(0xFF101623)),
-                      ),
-                      const Text(
-                        "Cardiologist",
-                        style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
-                            color: Color(0xFFADADAD)),
-                      ),
-                      const SizedBox(height: 8),
-                      Container(
-                        height: 1,
-                        color: const Color(0xFFE8F3F1),
-                        width: 180,
-                      ),
-                      const SizedBox(height: 12),
-                      Row(
-                        children: [
-                          Stack(
-                            children: [
-                              SvgPicture.asset(
-                                "assets/icons/star_rectangle.svg",
-                                width: 42,
-                                height: 20,
-                              ),
-                              Positioned(
-                                top: 4,
-                                left: 4,
-                                child: SvgPicture.asset(
-                                  "assets/icons/star.svg",
+            InkWell(
+              borderRadius: BorderRadius.circular(12),
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const DoctorDetailPage())),
+              child: Container(
+                padding: const EdgeInsets.only(top: 20, left: 26, right: 10),
+                width: double.infinity,
+                height: 130,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    color: const Color(0xFFFFFFFF),
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: const Color(0xFFE8F3F1),
+                      width: 1,
+                    )),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const CircleAvatar(
+                      radius: 44,
+                      backgroundImage: AssetImage("assets/images/cedric.png"),
+                    ),
+                    const SizedBox(
+                      width: 24,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          "Dr. Marcus Horizon",
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: Color(0xFF101623)),
+                        ),
+                        const Text(
+                          "Cardiologist",
+                          style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
+                              color: Color(0xFFADADAD)),
+                        ),
+                        const SizedBox(height: 8),
+                        Container(
+                          height: 1,
+                          color: const Color(0xFFE8F3F1),
+                          width: 180,
+                        ),
+                        const SizedBox(height: 12),
+                        Row(
+                          children: [
+                            Stack(
+                              children: [
+                                SvgPicture.asset(
+                                  "assets/icons/star_rectangle.svg",
+                                  width: 42,
+                                  height: 20,
+                                ),
+                                Positioned(
+                                  top: 4,
+                                  left: 4,
+                                  child: SvgPicture.asset(
+                                    "assets/icons/star.svg",
+                                    width: 13,
+                                    height: 13,
+                                  ),
+                                ),
+                                const Positioned(
+                                    top: 1.5,
+                                    right: 2,
+                                    child: const Text(
+                                      "4,7",
+                                      style: TextStyle(
+                                          color: Color(0xFF199A8E),
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w500),
+                                    ))
+                              ],
+                            ),
+                            const SizedBox(width: 18),
+                            Row(
+                              children: [
+                                SvgPicture.asset(
+                                  "assets/icons/location.svg",
                                   width: 13,
                                   height: 13,
+                                  color: const Color(0xFF3B4453),
                                 ),
-                              ),
-                              const Positioned(
-                                  top: 1.5,
-                                  right: 2,
-                                  child: const Text(
-                                    "4,7",
-                                    style: TextStyle(
-                                        color: Color(0xFF199A8E),
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500),
-                                  ))
-                            ],
-                          ),
-                          const SizedBox(width: 18),
-                          Row(
-                            children: [
-                              SvgPicture.asset(
-                                "assets/icons/location.svg",
-                                width: 13,
-                                height: 13,
-                                color: const Color(0xFF3B4453),
-                              ),
-                              const Text(
-                                "800m away",
-                                style: TextStyle(
-                                    color: Color(0xFF3B4453),
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500),
-                              )
-                            ],
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ],
+                                const Text(
+                                  "800m away",
+                                  style: TextStyle(
+                                      color: Color(0xFF3B4453),
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500),
+                                )
+                              ],
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
             const SizedBox(height: 26),
